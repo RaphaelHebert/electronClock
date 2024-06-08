@@ -70,6 +70,11 @@ export default defineConfig(({ command }) => {
         renderer: {},
       }),
     ],
+    test: {
+      globals: true,
+      environment: "jsdom",
+      setupFiles: ["./vitest.setup.ts"],
+    },
     server:
       process.env.VSCODE_DEBUG &&
       (() => {
