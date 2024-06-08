@@ -1,10 +1,11 @@
-import { Analogic, Digital } from "@/components";
+import { Analogic, Digital, AlarmList } from "@/components";
 
 export default function App() {
   return (
     <div>
       <Analogic />
       <Digital />
+      <AlarmList />
     </div>
   );
 }
