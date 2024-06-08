@@ -1,0 +1,444 @@
+.main {
+  background: lightgrey;
+}
+
+.container {
+  pointer-events: none;
+  position: relative;
+  box-sizing: border-box;
+  height: 550px;
+  width: 400px;
+  margin: auto;
+  background: white;
+  border: 4px solid lightgreen;
+}
+
+.run {
+  pointer-events: auto;
+  position: relative;
+  margin: auto;
+  top: 10px;
+  height: 50px;
+  width: 150px;
+  background: red;
+  border-radius: 5px;
+  color: white;
+  text-align: center;
+}
+
+.run p {
+  padding-top: 15px;
+}
+
+/* 
+#####################
+clock
+#####################
+*/
+
+.clock {
+  position: absolute;
+  box-sizing: border-box;
+  height: 300px;
+  width: 300px;
+  top: 86px;
+  left: 46px;
+  border: 5px solid black;
+  border-radius: 150px;
+}
+
+.needle {
+  position: absolute;
+  left: 132px;
+  height: 140px;
+}
+
+.hands {
+  position: relative;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 140px solid orange;
+  transform-origin: center bottom;
+  transform: rotate(0deg);
+  animation: sec 60s linear infinite;
+}
+
+.min {
+  top: 30px;
+  border-bottom: 110px solid blue;
+  animation: sec 3600s linear infinite;
+}
+
+.day {
+  top: 60px;
+  border-bottom: 80px solid black;
+  animation: sec 86400s linear infinite;
+}
+
+.center {
+  position: absolute;
+  top: 135px;
+  left: 130px;
+  height: 20px;
+  width: 20px;
+  background: gold;
+  border-radius: 10px;
+}
+
+/* animations */
+
+@keyframes sec {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.number {
+  position: absolute;
+  z-index: 0;
+  color: black;
+  left: 135px;
+  top: 5px;
+  width: 20px;
+  transform-origin: center 135px;
+  background: lightgrey;
+  text-align: center;
+}
+
+.two {
+  transform: rotate(60deg);
+}
+.four {
+  transform: rotate(120deg);
+}
+
+.six {
+  transform: rotate(180deg);
+}
+
+.height {
+  transform: rotate(240deg);
+}
+
+.ten {
+  transform: rotate(300deg);
+}
+
+/*  
+###################
+stopwatch
+###################
+*/
+
+.stopwatch {
+  position: absolute;
+  top: 400px;
+  left: 45px;
+  width: 280px;
+  height: 100px;
+  box-sizing: border-box;
+  border: 3px solid grey;
+}
+
+.container .hours {
+  animation-play-state: running;
+}
+
+.hours {
+  position: absolute;
+  font-size: 80px;
+  padding-left: 10px;
+  visibility: hidden;
+  animation-name: hour;
+  animation-duration: 3600s;
+  animation-iteration-count: 10;
+  animation-timing-function: linear;
+  animation-play-state: paused;
+}
+
+.oneh {
+  left: -70px;
+  animation-duration: 36000s;
+  animation-delay: 36000s;
+}
+.twoh {
+  left: -70px;
+  animation-duration: 14400;
+  animation-delay: 72000s;
+}
+
+.onet {
+  animation-delay: 3600s;
+}
+
+.twot {
+  animation-delay: 7200s;
+}
+
+.threet {
+  animation-delay: 10800s;
+}
+
+.fourt {
+  animation-delay: 14400s;
+}
+
+.fivet {
+  animation-delay: 18000s;
+}
+
+.sixt {
+  animation-delay: 21600s;
+}
+
+.sevent {
+  animation-delay: 25200s;
+}
+
+.heightt {
+  animation-delay: 28800s;
+}
+.ninet {
+  animation-delay: 32400s;
+}
+.zerot {
+  animation-delay: 0s;
+}
+
+@keyframes hour {
+  0% {
+    visibility: visible;
+  }
+  100% {
+    visibility: visible;
+  }
+}
+
+.semicol {
+  visibility: visible;
+  position: absolute;
+  left: 45px;
+  font-size: 80px;
+  padding-left: 10px;
+}
+
+.semicol2 {
+  left: 155px;
+}
+
+.tensmins {
+  left: 70px;
+  animation-name: tensminutes;
+  animation-duration: 3600s;
+  animation-iteration-count: 10;
+}
+
+.onem {
+  animation-delay: 600s;
+}
+
+.twom {
+  animation-delay: 1200s;
+}
+
+.threem {
+  animation-delay: 1800s;
+}
+
+.fourm {
+  animation-delay: 2400s;
+}
+
+.fivem {
+  animation-delay: 3000s;
+}
+
+.sixm {
+  animation-delay: 3600s;
+}
+
+.zerom {
+  animation-delay: 0s;
+}
+
+.mins {
+  left: 110px;
+  animation-name: minutes;
+  animation-duration: 600s;
+  animation-iteration-count: 6;
+}
+
+.zeromm {
+  animation-delay: 0s;
+  visibility: visible;
+}
+
+.onemm {
+  animation-delay: 60s;
+}
+
+.twomm {
+  animation-delay: 120s;
+}
+
+.threemm {
+  animation-delay: 180s;
+}
+
+.fourmm {
+  animation-delay: 240s;
+}
+
+.fivemm {
+  animation-delay: 300s;
+}
+.sixmm {
+  animation-delay: 360s;
+}
+.sevenmm {
+  animation-delay: 420s;
+}
+.heightmm {
+  animation-delay: 480s;
+}
+.ninemm {
+  animation-delay: 540s;
+}
+
+@keyframes minutes {
+  0% {
+    visibility: visible;
+  }
+  10% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes tensminutes {
+  0% {
+    visibility: visible;
+  }
+  16.66666% {
+    visibility: hidden;
+  }
+  100% {
+    visibility: hidden;
+  }
+}
+
+.tensmins {
+  left: 70px;
+  animation-name: tensminutes;
+  animation-duration: 3600s;
+  animation-iteration-count: 6;
+}
+
+.onem {
+  animation-delay: 600s;
+}
+
+.twom {
+  animation-delay: 1200s;
+}
+
+.threem {
+  animation-delay: 1800s;
+}
+
+.fourm {
+  animation-delay: 2400s;
+}
+
+.fivem {
+  animation-delay: 3000s;
+}
+
+.sixm {
+  animation-delay: 3600s;
+}
+
+.zerom {
+  animation-delay: 0s;
+}
+
+.secs {
+  left: 220px;
+  animation-name: minutes;
+  animation-duration: 10s;
+  animation-iteration-count: 3600;
+}
+
+.zeross {
+  animation-delay: 0s;
+  visibility: visible;
+}
+
+.oness {
+  animation-delay: 1s;
+}
+
+.twoss {
+  animation-delay: 2s;
+}
+
+.threess {
+  animation-delay: 3s;
+}
+
+.fourss {
+  animation-delay: 4s;
+}
+
+.fivess {
+  animation-delay: 5s;
+}
+.sixss {
+  animation-delay: 6s;
+}
+.sevenss {
+  animation-delay: 7s;
+}
+.heightss {
+  animation-delay: 8s;
+}
+.niness {
+  animation-delay: 9s;
+}
+
+.tenssecs {
+  left: 180px;
+  animation-name: tensminutes;
+  animation-duration: 60s;
+  animation-iteration-count: 600;
+}
+
+.zeros {
+  animation-delay: 0s;
+  visibility: visible;
+}
+
+.ones {
+  animation-delay: 10s;
+}
+
+.twos {
+  animation-delay: 20s;
+}
+
+.threes {
+  animation-delay: 30s;
+}
+
+.fours {
+  animation-delay: 40s;
+}
+
+.fives {
+  animation-delay: 50s;
+}
