@@ -1,5 +1,10 @@
-function App() {
-  return <div>Hello world</div>;
-}
+import { Analogic, Digital } from "@/components";
 
-export default App;
+export default function App() {
+  return (
+    <div>
+      <Analogic />
+      <Digital />
+    </div>
+  );
+}
