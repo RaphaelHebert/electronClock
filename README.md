@@ -3,7 +3,7 @@
 ## Overview
 
 This is a basic alarm clock desktop application made with electron React and SQLite3. It has been made for demo purposes. As so this project is more of a POC than a proper production ready project. As well all the steps of packaging, deploying to production or running the project on different environment have not been taken into account. It might evolve depending on the available time.
-The app display an ["analogic" clock](###Analogic Clock) as well as a [numeric clock](###Numeric Clock), two different approaches have been taken to build these clocks.
+The app display an ["analogic" clock](###Analogic_Clock) as well as a [numeric clock](###Numeric_Clock), two different approaches have been taken to build these clocks.
 The app gives the user to possibility to setup alarms. [Alarms](###Alarms) are persisted in a SQLite3 local database.
 
 ## TODO
