@@ -45,3 +45,14 @@ export const getHourMinuteDifference = (unixTime: number): number => {
   // Return the total difference in milliseconds
   return -(hourDifferenceMs + minuteDifferenceMs + secondDifferenceMs);
 };
+
+export const getHoursMinutesSeconds = (): number[] => {
+  const now = new Date();
+
+  // Extract hours, minutes, and seconds
+  const hours = ((now.getHours() + now.getMinutes() / 60) / 12) * 360;
+  const minutes = (now.getMinutes() / 60) * 360;
+  const seconds = (now.getSeconds() / 60) * 360;
+
+  return [hours, minutes, seconds];
+};

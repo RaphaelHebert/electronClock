@@ -1,4 +1,6 @@
 .digital_clock {
+    width: 100%;
+    margin: auto;
     font size: 48px;
     font family: monospace;
 }

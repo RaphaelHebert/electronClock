@@ -1,4 +1,5 @@
 import React from "react";
+import { getHoursMinutesSeconds } from "@/utils/time";
 import "./index.css";
 
 interface ClockNumber {
@@ -6,28 +7,14 @@ interface ClockNumber {
   num: number;
 }
 
+const basePosition: (num: number) => React.CSSProperties = (num) => {
+  return {
+    transformOrigin: "center bottom",
+    transform: `rotate(${num}deg)`,
+  };
+};
 const Analogic: React.FC = () => {
-  const now = new Date();
-
-  // Extract hours, minutes, and seconds
-  const hours = ((now.getHours() + now.getMinutes() / 60) / 12) * 360;
-  const minutes = (now.getMinutes() / 60) * 360;
-  const seconds = (now.getSeconds() / 60) * 360;
-
-  const hourPosition: React.CSSProperties = {
-    transformOrigin: "center bottom",
-    transform: `rotate(${hours}deg)`,
-  };
-
-  const minPosition: React.CSSProperties = {
-    transformOrigin: "center bottom",
-    transform: `rotate(${minutes}deg)`,
-  };
-
-  const secPosition: React.CSSProperties = {
-    transformOrigin: "center bottom",
-    transform: `rotate(${seconds}deg)`,
-  };
+  const [hours, minutes, seconds] = getHoursMinutesSeconds();
 
   const clockNumbers: ClockNumber[] = [
     { classN: "", num: 12 },
@@ -47,13 +34,13 @@ const Analogic: React.FC = () => {
               <p>{num}</p>
             </div>
           ))}
-          <div className="needle" style={secPosition}>
+          <div className="needle" style={basePosition(seconds)}>
             <div className="hands" />
           </div>
-          <div className="needle" style={minPosition}>
+          <div className="needle" style={basePosition(minutes)}>
             <div className="hands min" />
           </div>
-          <div className="needle" style={hourPosition}>
+          <div className="needle" style={basePosition(hours)}>
             <div className="hands day" />
           </div>
           <div className="center" />

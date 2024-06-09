@@ -54,6 +54,7 @@ const Alarm: React.FC<IProps> = ({ close }) => {
         onAccept={handleAccept}
         // TODO: create custom action bar see: https://github.com/mui/mui-x/issues/8495
         onClose={close}
+        minDateTime={dayjs()}
       />
     </>
   );

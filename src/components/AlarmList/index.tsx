@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import dayjs from "dayjs";
 import { IAlarm } from "@/type";
-import { Button, Modal, Box, Stack, Paper } from "@mui/material";
-import { Alarm, AlarmCard } from "@/components";
+import { Button, Box, Stack } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import { AlarmCard, AlarmModal, AddAlarmModal } from "@/components";
 import { fetchAlarms, deleteAlarm } from "@/db/alarms";
 import {
   isDateBeforeNow,
@@ -69,11 +69,16 @@ const AlarmList: React.FC = () => {
   };
 
   return (
-    <Paper>
-      <Stack>
-        <Button variant="contained" onClick={() => setIsModalOpen(true)}>
-          Add alarm
-        </Button>
+    <Stack>
+      <Button
+        sx={{ marginBottom: "20px" }}
+        variant="contained"
+        onClick={() => setIsModalOpen(true)}
+        startIcon={<AddIcon />}
+      >
+        Add alarm
+      </Button>
+      <Box sx={{ padding: "5px", height: "380px", overflow: "auto" }}>
         {alarms &&
           alarms.map((alarm) => (
             <AlarmCard
@@ -82,45 +87,13 @@ const AlarmList: React.FC = () => {
               updatedAlarmList={updatedAlarmList}
             />
           ))}
-
-        <Modal open={isModalOpen} onClose={handleModalClose}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 400,
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 4,
-            }}
-          >
-            <Alarm close={handleModalClose} />
-          </Box>
-        </Modal>
-        <Modal open={!!ringingAlarm} onClose={handleCloseRingingAlarm}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 400,
-              bgcolor: "background.paper",
-              boxShadow: 24,
-              p: 4,
-            }}
-          >
-            {ringingAlarm && (
-              <div>{`Alarm: ${dayjs(ringingAlarm.time).hour()}:${dayjs(
-                ringingAlarm.time
-              ).minute()}`}</div>
-            )}
-          </Box>
-        </Modal>
-      </Stack>
-    </Paper>
+      </Box>
+      <AddAlarmModal open={isModalOpen} onClose={handleModalClose} />
+      <AlarmModal
+        ringingAlarm={ringingAlarm}
+        onClose={handleCloseRingingAlarm}
+      />
+    </Stack>
   );
 };
 

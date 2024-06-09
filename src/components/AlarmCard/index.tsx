@@ -3,6 +3,7 @@ import dayjs from "dayjs";
 import { IAlarm } from "@/type";
 import { Button, Typography, Stack, Paper } from "@mui/material";
 import { deleteAlarm } from "@/db/alarms";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 interface IProps {
   alarm: IAlarm;
@@ -22,18 +23,19 @@ const AlarmCard: React.FC<IProps> = ({ alarm, updatedAlarmList }) => {
   };
 
   return (
-    <Paper elevation={3} style={{ padding: "16px", marginBottom: "16px" }}>
-      <Stack direction="column" spacing={1}>
-        <Typography variant="h6" style={{ fontWeight: "bold" }}>
-          {formattedTime}
+    <Paper elevation={3} style={{ padding: "12px", marginBottom: "12px" }}>
+      <Stack spacing={1} sx={{ alignItems: "center" }}>
+        <Typography variant="h6">
+          {repeat ? `Everyday ${formattedTime}` : formattedTime}
         </Typography>
-        {repeat && (
-          <Typography variant="body2" style={{ fontStyle: "italic" }}>
-            Everyday
-          </Typography>
-        )}
-        <Button onClick={handleDelete} variant="outlined" color="primary">
-          Delete alarm
+        <Button
+          onClick={handleDelete}
+          sx={{ width: "100%" }}
+          variant="outlined"
+          color="secondary"
+          startIcon={<DeleteOutlineIcon />}
+        >
+          delete alarm
         </Button>
       </Stack>
     </Paper>

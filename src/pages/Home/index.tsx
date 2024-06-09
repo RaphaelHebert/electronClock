@@ -1,16 +1,18 @@
 import { Analogic, Digital, AlarmList } from "@/components";
-import { Stack, Paper } from "@mui/material";
+import { Stack, Paper, Box } from "@mui/material";
 
 const Home: React.FC = () => {
   return (
-    <Stack direction="row">
-      <Paper>
-        <Stack>
+    <Stack direction="row" sx={{ width: "100vw" }}>
+      <Paper sx={{ margin: "0 20px" }} elevation={5}>
+        <Stack sx={{ alignItems: "center" }}>
           <Analogic />
           <Digital />
         </Stack>
       </Paper>
-      <AlarmList />
+      <Box sx={{ flex: 1, maxWidth: "250px", marginRight: "auto" }}>
+        <AlarmList />
+      </Box>
     </Stack>
   );
 };
