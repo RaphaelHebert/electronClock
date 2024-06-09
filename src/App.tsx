@@ -1,11 +1,11 @@
-import { Analogic, Digital, AlarmList } from "@/components";
+import { Home } from "@/pages";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 export default function App() {
   return (
-    <div>
-      <Analogic />
-      <Digital />
-      <AlarmList />
-    </div>
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <Home />{" "}
+    </LocalizationProvider>
   );
 }

@@ -25,13 +25,10 @@ _Files in this folder will be separated from your React application and built in
 │   ├── main                                 Main-process source code
 │   └── preload                              Preload-scripts source code
 │
-├── release                                  Generated after production build, contains executables
-│   └── {version}
-│       ├── {os}-{os_arch}                   Contains unpacked application executable
-│       └── {app_name}_{version}.{ext}       Installer for the application
+├── models                                  Connection to SQLite 3 database
 │
 ├── public                                   Static assets
-└── src                                      Renderer source code, your React application
+└── src                                      Renderer source code, React application
 ```
 
 ## 🔧 Additional features

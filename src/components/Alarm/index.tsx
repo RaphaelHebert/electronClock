@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { v4 as uuidv4 } from "uuid";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import { DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { StaticDateTimePicker } from "@mui/x-date-pickers/StaticDateTimePicker";
-import { LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+
 import { IAlarm } from "@/type";
+import { insertAlarm } from "@/db/alarms";
 
 interface IProps {
   close: () => void;
-  fetchAlarms: (alarm: IAlarm) => void;
 }
 
-const Alarm: React.FC<IProps> = ({ close, fetchAlarms }) => {
+const Alarm: React.FC<IProps> = ({ close }) => {
   // Initialize the state with the current Unix timestamp in milliseconds
   const [fromDate, setFormDate] = useState<number>(dayjs().valueOf());
   const [checked, setChecked] = useState<boolean>(true);
-
-  useEffect(() => {
-    console.log(fromDate); // This will log the Unix timestamp in milliseconds
-  }, [fromDate]);
 
   const handleCheckbox = () => {
     setChecked((prev) => !prev);
@@ -35,11 +29,10 @@ const Alarm: React.FC<IProps> = ({ close, fetchAlarms }) => {
       repeat: checked,
       id: uuidv4(),
     };
-    fetchAlarms(newAlarm);
-    // TODO: add to DB
+    insertAlarm(newAlarm);
   };
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
+    <>
       <FormControlLabel
         control={
           <Checkbox
@@ -62,7 +55,7 @@ const Alarm: React.FC<IProps> = ({ close, fetchAlarms }) => {
         // TODO: create custom action bar see: https://github.com/mui/mui-x/issues/8495
         onClose={close}
       />
-    </LocalizationProvider>
+    </>
   );
 };
 

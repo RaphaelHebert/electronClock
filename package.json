@@ -16,7 +16,13 @@
     "preview": "vite preview",
     "pree2e": "vite build --mode=test",
     "e2e": "playwright test",
-    "test": "vitest run --reporter verbose"
+    "test": "vitest run --reporter verbose",
+    "rebuild": "electron-rebuild -f -w better-sqlite3"
+  },
+  "build": {
+    "files": [
+      "src/assets/**"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",

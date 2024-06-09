@@ -1,5 +1,5 @@
 import { ipcRenderer, contextBridge } from "electron";
-import { getAlarms } from "../../models/alarmclockmgr";
+import * as alarms from "../../models/alarmclockmgr";
 
 // --------- Expose some API to the Renderer process ---------
 contextBridge.exposeInMainWorld("ipcRenderer", {
@@ -124,10 +124,6 @@ setTimeout(removeLoading, 4999);
 
 // ----------------------    DB Access   ------------------------------------------ //
 
-const getAllAlarms = () => {
-  getAlarms();
-};
-
 contextBridge.exposeInMainWorld("dbApi", {
-  getAlarms: getAllAlarms,
+  alarms,
 });

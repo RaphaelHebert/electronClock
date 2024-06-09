@@ -2,12 +2,13 @@ import React from "react";
 import dayjs from "dayjs";
 import { IAlarm } from "@/type";
 import { Button, Typography, Stack, Paper } from "@mui/material";
+import { deleteAlarm } from "@/db/alarms";
 
 interface IProps {
   alarm: IAlarm;
-  fetchAlarms: () => void;
+  updatedAlarmList: () => void;
 }
-const AlarmCard: React.FC<IProps> = ({ alarm, fetchAlarms }) => {
+const AlarmCard: React.FC<IProps> = ({ alarm, updatedAlarmList }) => {
   const { time, id, repeat } = alarm;
 
   const formattedTime = repeat
@@ -15,8 +16,8 @@ const AlarmCard: React.FC<IProps> = ({ alarm, fetchAlarms }) => {
     : dayjs(time).format("YYYY-MM-DD HH:mm");
 
   const handleDelete = () => {
-    // TODO delete from db and refetch alarms
-    fetchAlarms();
+    deleteAlarm(alarm.id);
+    updatedAlarmList();
     console.log(`deleting alarm ${id}`);
   };
 
