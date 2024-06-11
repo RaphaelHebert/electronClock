@@ -16,7 +16,7 @@ const Alarm: React.FC<IProps> = ({ close }) => {
   const [fromDate, setFormDate] = useState<number>(dayjs().valueOf());
   const [checked, setChecked] = useState<boolean>(true);
 
-  const handleCheckbox = () => {
+  const toggleCheckBox = () => {
     setChecked((prev) => !prev);
   };
 
@@ -25,11 +25,13 @@ const Alarm: React.FC<IProps> = ({ close }) => {
       return;
     }
     const newAlarm: IAlarm = {
-      time: newValue.valueOf(),
+      // floor to the minute (no seconds)
+      time: newValue.valueOf() - (newValue.valueOf() % 60000),
       repeat: checked,
       id: uuidv4(),
     };
     insertAlarm(newAlarm);
+    close();
   };
   return (
     <>
@@ -38,7 +40,7 @@ const Alarm: React.FC<IProps> = ({ close }) => {
           <Checkbox
             id=""
             checked={checked}
-            onChange={handleCheckbox}
+            onChange={toggleCheckBox}
             inputProps={{ "aria-label": "controlled" }}
           />
         }
@@ -53,6 +55,7 @@ const Alarm: React.FC<IProps> = ({ close }) => {
         }}
         onAccept={handleAccept}
         // TODO: create custom action bar see: https://github.com/mui/mui-x/issues/8495
+        // onClose to be removed in next major MUI version
         onClose={close}
         minDateTime={dayjs()}
       />

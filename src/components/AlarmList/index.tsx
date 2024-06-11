@@ -11,27 +11,38 @@ import {
 } from "@/utils/time";
 
 const AlarmList: React.FC = () => {
-  const [alarms, setAlarms] = useState<IAlarm[]>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [alarms, setAlarms] = useState<IAlarm[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [newDay, setNewDay] = useState<number>(0);
-
   const [ringingAlarm, setRingingAlarm] = useState<IAlarm | null>(null);
 
-  const updatedAlarmList = () => {
+  const updateAlarmList = () => {
     const data = fetchAlarms();
-    setAlarms(data);
+    if (data) setAlarms(data);
   };
 
+  const cleanUpAlarms = () => {
+    if (alarms) {
+      alarms.forEach((alarm) => {
+        if (getHourMinuteDifference(alarm.time) <= 0 && !alarm.repeat) {
+          deleteAlarm(alarm.id);
+        }
+      });
+    }
+  };
+
+  // Handle closing the AddAlarmModal
   const handleModalClose = () => {
     setIsModalOpen(false);
-    updatedAlarmList();
+    updateAlarmList();
   };
 
+  // Initial load of alarm list
   useEffect(() => {
-    const alarms = fetchAlarms();
-    setAlarms(alarms);
+    updateAlarmList();
   }, []);
 
+  // Effect to manage alarm timeouts and daily reset
   useEffect(() => {
     const timeOuts: NodeJS.Timeout[] = [];
     if (alarms) {
@@ -48,6 +59,8 @@ const AlarmList: React.FC = () => {
           timeOuts.push(
             setTimeout(() => {
               setRingingAlarm(alarm);
+              cleanUpAlarms();
+              updateAlarmList();
             }, diff)
           );
         }
@@ -61,11 +74,8 @@ const AlarmList: React.FC = () => {
   }, [alarms, newDay]);
 
   const handleCloseRingingAlarm = () => {
-    if (!ringingAlarm?.repeat) {
-      if (ringingAlarm) deleteAlarm(ringingAlarm?.id);
-    }
+    cleanUpAlarms();
     setRingingAlarm(null);
-    updatedAlarmList();
   };
 
   return (
@@ -84,7 +94,7 @@ const AlarmList: React.FC = () => {
             <AlarmCard
               key={alarm.id}
               alarm={alarm}
-              updatedAlarmList={updatedAlarmList}
+              updateAlarmList={updateAlarmList}
             />
           ))}
       </Box>

@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
 import AlarmList from "..";
 
-vi.mock("@/components", async (importOriginal) => {
+vi.doMock("@/components", async (importOriginal) => {
   const actual: any = await importOriginal();
   return {
     ...actual,

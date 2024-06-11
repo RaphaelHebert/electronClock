@@ -13,6 +13,7 @@ The app gives the user to possibility to set-up alarms. [Alarms](###Alarms) are 
 - error handling for db calls
 - check if alarms are stale and clean-up on alarm fetching
 - managing PRODUCTION and DEVELOPMENT environments
+- fix ES module scope error in vitest
 - pre-commit hook, lint and prettify
 
 ## 🛫 Quick Setup
