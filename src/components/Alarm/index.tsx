@@ -25,7 +25,7 @@ const Alarm: React.FC<IProps> = ({ close }) => {
       return;
     }
     const newAlarm: IAlarm = {
-      time: newValue.valueOf(),
+      time: newValue.valueOf() - (newValue.valueOf() % 60000),
       repeat: checked,
       id: uuidv4(),
     };

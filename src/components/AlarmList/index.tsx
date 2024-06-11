@@ -12,7 +12,7 @@ import {
 
 const AlarmList: React.FC = () => {
   const [alarms, setAlarms] = useState<IAlarm[]>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [newDay, setNewDay] = useState<number>(0);
 
   const [ringingAlarm, setRingingAlarm] = useState<IAlarm | null>(null);
@@ -22,14 +22,24 @@ const AlarmList: React.FC = () => {
     setAlarms(data);
   };
 
+  const cleanUpAlarms = () => {
+    if (alarms) {
+      alarms.forEach((alarm) => {
+        if (getHourMinuteDifference(alarm.time) <= 0) {
+          console.log("ok");
+          deleteAlarm(alarm.id);
+        }
+      });
+    }
+  };
+
   const handleModalClose = () => {
     setIsModalOpen(false);
     updatedAlarmList();
   };
 
   useEffect(() => {
-    const alarms = fetchAlarms();
-    setAlarms(alarms);
+    updatedAlarmList();
   }, []);
 
   useEffect(() => {
@@ -48,6 +58,8 @@ const AlarmList: React.FC = () => {
           timeOuts.push(
             setTimeout(() => {
               setRingingAlarm(alarm);
+              cleanUpAlarms();
+              updatedAlarmList();
             }, diff)
           );
         }
@@ -61,11 +73,8 @@ const AlarmList: React.FC = () => {
   }, [alarms, newDay]);
 
   const handleCloseRingingAlarm = () => {
-    if (!ringingAlarm?.repeat) {
-      if (ringingAlarm) deleteAlarm(ringingAlarm?.id);
-    }
+    cleanUpAlarms();
     setRingingAlarm(null);
-    updatedAlarmList();
   };
 
   return (
