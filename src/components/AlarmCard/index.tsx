@@ -7,9 +7,10 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 interface IProps {
   alarm: IAlarm;
-  updatedAlarmList: () => void;
+  updateAlarmList: () => void;
 }
-const AlarmCard: React.FC<IProps> = ({ alarm, updatedAlarmList }) => {
+
+const AlarmCard: React.FC<IProps> = ({ alarm, updateAlarmList }) => {
   const { time, id, repeat } = alarm;
 
   const formattedTime = repeat
@@ -17,9 +18,8 @@ const AlarmCard: React.FC<IProps> = ({ alarm, updatedAlarmList }) => {
     : dayjs(time).format("YYYY-MM-DD HH:mm");
 
   const handleDelete = () => {
-    deleteAlarm(alarm.id);
-    updatedAlarmList();
-    console.log(`deleting alarm ${id}`);
+    deleteAlarm(id);
+    updateAlarmList();
   };
 
   return (
